@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="project/boot/fideco/service/|project/boot/fideco/controller/|project/boot/fideco/repository/|project/boot/fideco/config/|project/boot/fideco/dto/|project/boot/fideco/entity/" kind="src" path="project/src/main/java"/>
+	<classpathentry kind="src" path="project/src/main/java/project/boot/fideco/config"/>
+	<classpathentry kind="src" path="project/src/main/java/project/boot/fideco/controller"/>
+	<classpathentry kind="src" path="project/src/main/java/project/boot/fideco/dto"/>
+	<classpathentry kind="src" path="project/src/main/java/project/boot/fideco/entity"/>
+	<classpathentry kind="src" path="project/src/main/java/project/boot/fideco/repository"/>
+	<classpathentry kind="src" path="project/src/main/java/project/boot/fideco/service"/>
+	<classpathentry kind="src" path="project/src/test/java"/>
+	<classpathentry kind="lib" path="project/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
