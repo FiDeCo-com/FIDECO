@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- jQuery -->
+<script th:src="@{https://cdn.iamport.kr/js/iamport.payment-1.2.0.js}"
+	type="text/javascript"></script>
+
+<script type="text/javascript">
+	var IMP = window.IMP;
+	IMP.init("imp34781112");
+
+	function requestPay() {
+		console.log("Starting payment request");
+		IMP.request_pay({
+			pg : "html5_inicis",
+			pay_method : "card",
+			//customer_uid: 'your-customer-unique-id',
+			merchant_uid : "[[${paymentDTO.merchant_uid}]]",
+			name : "[[${paymentDTO.name}]]",
+			amount : "[[${paymentDTO.amount}]]",
+			order_no : "[[${paymentDTO.order_no}]]",
+			product_id : "[[${paymentDTO.product_id}]]",
+			member_id : "[[${paymentDTO.member_id}]]",
+			cart_id : "[[${paymentDTO.cart_id}]]",
+			paymenttime : "[[${#temporals.format(paymentDTO.paymenttime, 'yyyy-MM-dd HH:mm:ss')}]]"
+		}, function(rsp) {
+			if (rsp.success) {
+				console.log("Payment successful:", rsp);
+				alert("결제가 완료되었습니다.");
+				// 결제 성공 페이지로 직접 이동
+				window.location.href = "./paymentSuccess" + "?merchant_uid="
+						+ rsp.merchant_uid + "&name="
+						+ encodeURIComponent("[[${paymentDTO.name}]]")
+						+ "&amount=" + rsp.paid_amount + "&order_no="
+						+ encodeURIComponent("[[${paymentDTO.order_no}]]")
+						+ "&product_id="
+						+ encodeURIComponent("[[${paymentDTO.product_id}]]")
+						+ "&member_id="
+						+ encodeURIComponent("[[${paymentDTO.member_id}]]")
+						+ "&cart_id="
+						+ encodeURIComponent("[[${paymentDTO.cart_id}]]")
+						+ "&paymenttime="
+						+ encodeURIComponent("[[${paymentDTO.paymenttime}]]"); //페이지 새로고침 없이 URL을 변경 가능
+
+			} else {
+				console.log("Payment failed:", rsp);
+				alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+			}
+		});
+	}
+</script>
+
+<meta charset="UTF-8" />
+<title>Sample Payment</title>
+</head>
+<body>
+	<form id="paymentForm">
+		<input type="hidden" name="merchant_uid"
+			th:value="${paymentDTO.merchant_uid}"> 
+			<input type="hidden"
+			name="name" th:value="${paymentDTO.name}"> 
+			<input
+			type="hidden" name="amount" th:value="${paymentDTO.amount}">
+		<input type="hidden" name="order_no" th:value="${paymentDTO.order_no}">
+		<input type="hidden" name="product_id"
+			th:value="${paymentDTO.product_id}"> 
+			<input type="hidden"
+			name="member_id" th:value="${paymentDTO.member_id}"> 
+			<input type="hidden" name="cart_id" th:value="${paymentDTO.cart_id}">
+			<input type="hidden" name="paymenttime" th:value="${paymentDTO.paymenttime}">
+	</form>
+	<button onclick="requestPay()">결제하기</button>
+
+</body>
+</html>
