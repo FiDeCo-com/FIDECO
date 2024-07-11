@@ -6,4 +6,6 @@ import project.boot.fideco.entity.Payment;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
 
+	
+
 }

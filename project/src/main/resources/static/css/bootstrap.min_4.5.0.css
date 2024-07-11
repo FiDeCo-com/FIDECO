@@ -38,6 +38,7 @@
 .show>.btn-success.dropdown-toggle:focus {
     box-shadow: 0 0 0 .2rem rgba(72, 180, 97, .5);
 }
+
 .btn-custom-small {
     padding: 0.5rem 0.7rem; /* 버튼 크기 조정 */
     font-size: 0.875rem;     /* 폰트 크기 조정 */

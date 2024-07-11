@@ -19,7 +19,6 @@ import project.boot.fideco.service.PaymentService;
 @Controller
 @RequiredArgsConstructor
 public class PaymentController {
-
 	@Inject
 	private final PaymentService paymentService;
 
@@ -86,4 +85,5 @@ public class PaymentController {
 		model.addAttribute("paymentDTO", paymentDTO);
 		return "./payment/payment_success";
 	}
+	
 }
