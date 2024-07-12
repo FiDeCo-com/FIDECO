@@ -1,97 +1,178 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>공지사항 입력</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min_4.5.0.css}">
-<style>
-#notice_content {
-	font-size: 1.5rem; /* 내용 입력란 폰트 크기를 크게 설정 */
-	width : 950px; /* 내용 입력란 패딩 설정 */
-	height: 300px; /* 내용 입력란 높이 설정 */
-	resize: vertical; /* 세로 크기 조정 허용 */
-}
+    <meta charset="UTF-8">
+    <title>공지사항 입력</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min_4.5.0.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* 전체 배경색 */
+            color: #333; /* 기본 글자색 */
+            padding-top: 60px; /* 헤더 고정을 위한 추가 여백 */
+        }
 
-#notice_title {
-	width: 350px;
-}
-#file{
-	height : 35px;
-	text-align: center;
-}
-</style>
+        header {
+            color: #000000; /* 헤더 글자색 */
+            padding: 10px 0;
+            text-align: center;
+            width: 100%; /* 전체 너비로 확장 */
+            
+        }
+
+        footer {
+            background-color: #000000; /* 푸터 배경색 */
+            color: #f6f6f6; /* 푸터 글자색 */
+            padding: 20px 0;
+            text-align: center;
+            bottom: 0; /* 화면 하단에 고정 */
+            width: 100%; /* 전체 너비 */
+        }
+
+        #main-header h1 {
+            font-size: 2rem; /* 헤더 제목 폰트 크기 */
+        }
+
+        #actions {
+            background-color: #f8f9fa; /* 액션 영역 배경색 */
+            padding: 10px 0;
+        }
+
+        #details {
+            padding: 20px 0;
+        }
+
+        .card {
+            border: none; /* 카드 테두리 제거 */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 그림자 추가 */
+        }
+
+        #notice_content {
+            font-size: 1.5rem; /* 내용 입력란 폰트 크기 */
+            width: 100%; /* 너비 조정 */
+            height: 300px; /* 높이 설정 */
+            resize: vertical; /* 세로 크기 조정 허용 */
+        }
+
+        #notice_title {
+            width: 100%; /* 너비 조정 */
+        }
+
+        #file {
+            height: 35px; /* 파일 업로드 높이 설정 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* 폼 그룹 간격 설정 */
+        }
+
+        .btn-secondary {
+            background-color: #007bff; /* 버튼 배경색 */
+            color: #ffffff; /* 버튼 글자색 */
+            border: none; /* 테두리 제거 */
+        }
+
+        .btn-secondary:hover {
+            background-color: #0056b3; /* 호버 배경색 */
+        }
+
+        .btn-cancel {
+            color: white; /* 취소 버튼 텍스트 색상 */
+            text-decoration: none; /* 밑줄 제거 */
+        }
+
+        .btn-block {
+            width: 100%; /* 블록 레벨 버튼 전체 너비 */
+        }
+    </style>
 </head>
 <body>
-	<header id="main-header" class="py-2 btn-dark text-white">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<h1>공지사항 입력</h1>
-				</div>
-			</div>
-		</div>
-	</header>
-	<section id="actions" class="py-4 mb-4 bg-light"></section>
-	<section id="details">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card">
-						<div class="card-header">
-							<h5>공지사항 입력</h5>
-						</div>
-						<div class="card-body">
-							<form method="post" id="sign_notice" th:action="@{/NoticeInsert}"
-								enctype="multipart/form-data">
-								<fieldset>
-									<div class="form-group row">
-										<label for="notice_title" class="ml-sm-3 col-form-label">
-											공지사항 제목 </label>
-										<div class="ml-sm-3">
-											<input type="text" th:name="notice_title" id="notice_title"
-												class="form-control form-control-sm">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label for="notice_content" class="ml-sm-3 col-form-label">
-											공지사항 내용 </label>
-										<div class="ml-sm-3">
-											<input type="text" th:name="notice_content"
-												id="notice_content" class="form-control form-control-sm">
-										</div>
-									</div>
+    <header id="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>공지사항 입력</h1>
+                </div>
+            </div>
+        </div>
+    </header>
 
-									<div class="ml-sm-3">
-										<input type="hidden" name="notice_writer" id="notice_writer"
-											class="form-control form-control-sm" value="관리자">
-									</div>
+    <section id="actions">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- 액션 영역 추가 가능 -->
+                </div>
+            </div>
+        </div>
+    </section>
 
-									<div class="form-group row">
-										<label for="file" class="ml-sm-3 col-form-label"> 파일
-											추가하기 </label>
-										<div class="ml-sm-3">
-											<input type="file" th:name="file" id="file"
-												class="form-control form-control-sm">
-										</div>
-									</div>
-									<div class="form-group">
-										<button type="submit" class="btn btn-secondary">등록</button>
-										<button type="reset" class="btn btn-secondary">
-										<a th:href="@{./NoticeSelect}" style="color: white; text-decoration: none;">취소</a>
-										</button>
-									</div>
-								</fieldset>
-							</form>
-							<div>
-								<a th:href="@{/NoticeSelect}" class="btn btn-primary btn-block">
-									공지사항 목록 </a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>공지사항 입력</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" id="sign_notice" th:action="@{/NoticeInsert}" enctype="multipart/form-data">
+                                <fieldset>
+                                    <div class="form-group row">
+                                        <label for="notice_title" class="col-sm-3 col-form-label">공지사항 제목</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" th:name="notice_title" id="notice_title" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="notice_content" class="col-sm-3 col-form-label">공지사항 내용</label>
+                                        <div class="col-sm-9">
+                                            <textarea id="notice_content" th:name="notice_content" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="file" class="col-sm-3 col-form-label">파일 추가하기</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" th:name="file" id="file" class="form-control-file">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <input type="hidden" name="notice_writer" id="notice_writer" class="form-control" value="관리자">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-secondary">등록</button>
+                                        <button type="reset" class="btn btn-secondary">
+                                            <a th:href="@{./NoticeSelect}" class="btn-cancel">취소</a>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <div>
+                                <a th:href="@{/NoticeSelect}" class="btn btn-primary btn-block">공지사항 목록</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>(주)FiDeCo</p>
+                    <p>주소 서울특별시 구로구 182-13 대륭포스트 2차 2층</p>
+                    <p>사업자 번호 123-23-345</p>
+                    <p>&copy; FiDeCo Co, Ltd. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
