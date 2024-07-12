@@ -4,14 +4,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import lombok.RequiredArgsConstructor;
 import project.boot.fideco.filter.JwtAuthenticationFilter;
 
@@ -44,6 +46,9 @@ public class WebSecurityConfig {
 						.requestMatchers("/member/memberList").hasRole("ADMIN") // 관리자만 접근 가능
 						//장바구니목록
 						.requestMatchers("/cart/list").hasRole("ADMIN") // 관리자만 접근 가능
+						//주문목록
+						.requestMatchers("/orders/list").hasRole("ADMIN") // 관리자만 접근 가능
+						.requestMatchers("/orders/update").hasRole("ADMIN") // 관리자만 접근 가능
 						.anyRequest().permitAll())
 						//403 접근제한
 						.exceptionHandling(exceptionHandling -> exceptionHandling
@@ -67,4 +72,5 @@ public class WebSecurityConfig {
 
 		return source;
 	}
+	
 }

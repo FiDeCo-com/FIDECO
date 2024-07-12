@@ -1,19 +1,17 @@
 package project.boot.fideco.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.Data;
+import project.boot.fideco.entity.PaymentStatus;
+
+import java.time.LocalDateTime;
 
 @Data
 public class PaymentDTO {
-	private Long id;
-
-	private String merchant_uid;
-	private String name;
-	private int amount;
-	private Long order_no;
-	private Long product_id;
-	private Long member_id;
-	private Long cart_id;
-	private LocalDateTime paymenttime;
+    private Long id;
+    private String merchantUid;
+    private Long order_id; // OrderEntity의 ID 값
+    private int amount;
+    private String member_id; // MemberEntity의 ID 값
+    private PaymentStatus paymentStatus;
+    private LocalDateTime paymentDate;
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 주문 목록</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="navbar.html"></div>
+    <div class="container mt-4">
+        <h2>회원 주문 목록</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>주문 ID</th>
+                    <th>장바구니 ID</th>
+                    <th>회원 ID</th>
+                    <th>주문 금액</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderId}">주문 ID</td>
+                    <td th:text="${order.cartId}">장바구니 ID</td>
+                    <td th:text="${order.memberId}">회원 ID</td>
+                    <td th:text="${order.orderAmount}">주문 금액</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

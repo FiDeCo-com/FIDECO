@@ -15,7 +15,7 @@
 <body>
     <div th:replace="navbar.html"></div>
     <div class="container mt-4">
-        <h2>장바구니 목록</h2>
+        <h2>장바구니</h2>
         <table class="cart-table">
             <thead>
                 <tr>
@@ -55,6 +55,7 @@
             const selectAllCheckbox = document.getElementById('select-all');
             const itemCheckboxes = document.querySelectorAll('.select-item');
             const totalPriceElement = document.getElementById('total-price');
+            const checkoutButton = document.getElementById('checkout-button');
 
             function calculateTotalPrice() {
                 let totalPrice = 0;
@@ -126,6 +127,30 @@
                         console.error('Error:', error);
                         alert('상품 삭제 중 오류가 발생했습니다.');
                     });
+                });
+            });
+
+            checkoutButton.addEventListener('click', function() {
+                const orderAmount = parseInt(totalPriceElement.textContent.replace(/,/g, ''));
+
+                fetch('/orders/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `orderAmount=${orderAmount}`
+                }).then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('주문에 실패했습니다.');
+                    }
+                }).then(data => {
+                    alert('주문화면으로 이동합니다.');
+                    window.location.href = `/orders/${data.orderId}`;
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('주문 중 오류가 발생했습니다.');
                 });
             });
 
